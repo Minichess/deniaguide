@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marina Alta · Travel Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:      #E8DDD0;
+    --sand:       #D4C4B0;
+    --rust:       #8B3A2A;
+    --brown:      #4A2E1A;
+    --olive:      #5C6B3A;
+    --taupe:      #7A6654;
+    --dark:       #2A1A0E;
+    --warm-white: #FAF6F0;
+    --blue:       #2C7DA0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background-color:var(--cream);
+    color:var(--dark);
+    font-family:'Libre Baskerville',Georgia,serif;
+    font-size:13px;
+    line-height:1.7;
+    max-width:860px;
+    margin:0 auto;
+    padding:0 24px 60px;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* LINKS */
+  a.map-link {
+    display:inline-flex; align-items:center; gap:4px;
+    font-size:10px; color:var(--taupe); font-style:italic;
+    text-decoration:none; font-family:'Libre Baskerville',serif;
+  }
+  a.map-link:hover { color:var(--rust); text-decoration:underline; }
+  a.web-link {
+    display:inline-flex; align-items:center; gap:4px;
+    font-size:10px; color:var(--taupe); font-style:italic;
+    text-decoration:none; font-family:'Libre Baskerville',serif;
+  }
+  a.web-link:hover { color:var(--rust); text-decoration:underline; }
+
+  /* COVER */
+  .cover { text-align:center; padding:48px 0 36px; border-bottom:1.5px solid var(--sand); margin-bottom:8px; }
+  .cover-eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--taupe); margin-bottom:16px; }
+  .cover-title { font-family:'Playfair Display',serif; font-size:clamp(56px,10vw,88px); font-weight:900; color:var(--rust); line-height:0.92; text-transform:uppercase; letter-spacing:-1px; margin-bottom:20px; }
+  .cover-title span { display:block; font-style:italic; font-size:clamp(32px,6vw,52px); font-weight:700; color:var(--brown); letter-spacing:0; margin-top:4px; }
+  .cover-tagline { font-family:'IM Fell English',serif; font-style:italic; font-size:15px; color:var(--taupe); margin-bottom:6px; }
+  .cover-sub { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--taupe); }
+  .botanical { display:inline-block; opacity:0.55; margin:0 12px; vertical-align:middle; }
+
+  /* SECTIONS */
+  .section-block { margin-top:48px; margin-bottom:18px; }
+  .section-label { font-size:9px; letter-spacing:5px; text-transform:uppercase; color:var(--taupe); margin-bottom:6px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(34px,7vw,58px); font-weight:900; text-transform:uppercase; color:var(--rust); line-height:0.9; letter-spacing:-0.5px; }
+  .section-title em { font-style:italic; font-weight:700; color:var(--brown); font-size:0.7em; display:block; }
+  .divider-line { border:none; border-top:1px solid var(--sand); margin:10px 0 18px; }
+
+  /* INTRO */
+  .intro-text { font-size:12px; color:var(--dark); line-height:1.7; margin-bottom:12px; }
+  .intro-note { font-family:'Playfair Display',serif; font-style:italic; font-size:13px; color:var(--rust); margin-bottom:20px; }
+
+  /* TOWN */
+  .town-header { display:flex; align-items:center; gap:12px; margin:28px 0 12px; }
+  .town-name { font-family:'Playfair Display',serif; font-size:21px; font-weight:700; font-style:italic; color:var(--brown); white-space:nowrap; }
+  .town-line { flex:1; height:1px; background:var(--sand); }
+
+  /* SUBCAT */
+  .subcat { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--taupe); margin:16px 0 8px; padding-bottom:3px; border-bottom:1px solid var(--sand); }
+
+  /* TWO-COLUMN RESTAURANT GRID */
+  .resto-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px; }
+
+  /* COMPACT CARD — no description */
+  .card-compact {
+    background:var(--warm-white);
+    border:1px solid var(--sand);
+    padding:11px 14px;
+    position:relative;
+  }
+  .card-compact::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--rust); }
+  .card-compact-bar::before { background:var(--olive); }
+  .card-compact-beach::before { background:var(--blue); }
+  .card-compact-name { font-family:'Playfair Display',serif; font-size:13px; font-weight:700; color:var(--brown); margin-bottom:2px; }
+  .card-compact-price { font-size:10px; font-weight:700; color:var(--rust); }
+  .card-compact-tag { font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--taupe); margin-bottom:5px; line-height:1.4; }
+
+  /* FULL-WIDTH CARD (beach clubs, boat) */
+  .card { background:var(--warm-white); border:1px solid var(--sand); padding:12px 16px; margin-bottom:8px; position:relative; }
+  .card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--rust); }
+  .card-bar::before { background:var(--olive); }
+  .card-beach::before { background:var(--blue); }
+  .card-header { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:3px; }
+  .card-name { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--brown); }
+  .card-price { font-size:10px; font-weight:700; color:var(--rust); white-space:nowrap; padding-top:2px; }
+  .card-tag { font-size:8.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--taupe); margin-bottom:5px; }
+
+  /* SUNDOWNER LIST */
+  .sundowner-list { list-style:none; margin:0; padding:0; }
+  .sundowner-list li { padding:8px 0; border-bottom:1px solid var(--sand); display:flex; align-items:center; gap:12px; }
+  .sundowner-list li:last-child { border-bottom:none; }
+  .sundowner-dot { width:6px; height:6px; border-radius:50%; background:var(--olive); flex-shrink:0; }
+  .sundowner-name { font-family:'Playfair Display',serif; font-size:13px; font-weight:700; color:var(--brown); }
+
+  /* BEACHES */
+  .beach-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .beach-card { background:var(--warm-white); border:1px solid var(--sand); padding:13px 15px; position:relative; }
+  .beach-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--olive); opacity:0.4; }
+  .beach-name { font-family:'Playfair Display',serif; font-size:13px; font-weight:700; color:var(--brown); margin-bottom:2px; }
+  .beach-town { font-size:8.5px; letter-spacing:2px; text-transform:uppercase; color:var(--taupe); margin-bottom:5px; }
+  .beach-desc { font-size:11px; color:var(--dark); line-height:1.5; margin-bottom:5px; }
+
+  /* TABLES */
+  .info-table { width:100%; border-collapse:collapse; margin-bottom:16px; background:var(--warm-white); }
+  .info-table th { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--taupe); padding:8px 12px; border-bottom:1.5px solid var(--sand); text-align:left; }
+  .info-table td { font-size:11.5px; padding:8px 12px; border-bottom:1px solid var(--sand); vertical-align:top; line-height:1.5; }
+  .info-table tr:last-child td { border-bottom:none; }
+  .info-table tr:nth-child(even) td { background:rgba(212,196,176,0.15); }
+  .td-name { font-weight:700; color:var(--brown); }
+  .td-price { font-weight:700; color:var(--rust); white-space:nowrap; }
+  .td-note { font-size:10.5px; color:var(--taupe); }
+
+  /* VISITAS */
+  .visita-item { display:grid; grid-template-columns:3px 1fr; gap:0 14px; margin-bottom:12px; }
+  .visita-stripe { background:var(--rust); border-radius:2px; }
+  .visita-name { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--brown); margin-bottom:1px; }
+  .visita-tag { font-size:8.5px; letter-spacing:2px; text-transform:uppercase; color:var(--taupe); margin-bottom:3px; }
+  .visita-desc { font-size:11.5px; line-height:1.55; color:var(--dark); margin-bottom:4px; }
+  .visita-sep { border:none; border-top:1px solid var(--sand); margin:12px 0; }
+
+  /* MARKETS */
+  .mercado-card { background:var(--warm-white); border:1px solid var(--sand); padding:11px 16px; margin-bottom:8px; }
+  .mercado-name { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:var(--brown); margin-bottom:2px; }
+  .mercado-when { font-size:8.5px; letter-spacing:2px; text-transform:uppercase; color:var(--olive); margin-bottom:4px; }
+  .mercado-desc { font-size:11.5px; color:var(--dark); line-height:1.55; margin-bottom:5px; }
+
+  /* PULL QUOTE */
+  .pull-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:16px; color:var(--rust); text-align:center; padding:20px 40px; border-top:1px solid var(--sand); border-bottom:1px solid var(--sand); margin:30px 0; line-height:1.4; }
+  .pull-quote span { display:block; font-family:'Libre Baskerville',serif; font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--taupe); font-style:normal; margin-top:8px; }
+
+  /* NOTE */
+  .note-box { background:rgba(140,58,42,0.06); border-left:3px solid var(--rust); padding:9px 13px; margin:12px 0; font-size:11px; font-style:italic; color:var(--taupe); line-height:1.6; }
+
+  /* FOOTER */
+  .footer { text-align:center; padding:32px 0 20px; margin-top:48px; border-top:1.5px solid var(--sand); }
+  .footer-title { font-family:'Playfair Display',serif; font-size:26px; font-weight:900; font-style:italic; color:var(--rust); margin-bottom:6px; }
+  .footer-sub { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--taupe); }
+
+  @media print { body { max-width:100%; padding:0 20px; } .card-compact,.beach-card,.mercado-card,.visita-item { break-inside:avoid; } }
+</style>
+</head>
+<body>
+
+<svg style="display:none"><symbol id="pin" viewBox="0 0 10 13"><path d="M5 0C2.24 0 0 2.24 0 5c0 3.75 5 8 5 8s5-4.25 5-8c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1 1 5 3.5a1.5 1.5 0 0 1 0 3z" fill="currentColor"/></symbol></svg>
+
+<!-- COVER -->
+<div class="cover">
+  <p class="cover-eyebrow">Costa Blanca · Alicante · Spain</p>
+  <h1 class="cover-title">Marina<span>Alta.</span></h1>
+  <p class="cover-tagline">
+    <svg class="botanical" width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3C14 3 8 10 8 16C8 20 11 24 14 25C17 24 20 20 20 16C20 10 14 3 14 3Z" stroke="#7A6654" stroke-width="1" fill="none"/><path d="M14 8L14 25" stroke="#7A6654" stroke-width="0.8"/><path d="M11 14C11 14 8 12 6 14" stroke="#7A6654" stroke-width="0.8" fill="none"/><path d="M17 12C17 12 20 10 22 12" stroke="#7A6654" stroke-width="0.8" fill="none"/></svg>
+    Restaurants · Beaches · Markets · Things to do
+    <svg class="botanical" width="26" height="26" viewBox="0 0 28 28" fill="none"><path d="M14 3C14 3 8 10 8 16C8 20 11 24 14 25C17 24 20 20 20 16C20 10 14 3 14 3Z" stroke="#7A6654" stroke-width="1" fill="none"/><path d="M14 8L14 25" stroke="#7A6654" stroke-width="0.8"/><path d="M11 14C11 14 8 12 6 14" stroke="#7A6654" stroke-width="0.8" fill="none"/><path d="M17 12C17 12 20 10 22 12" stroke="#7A6654" stroke-width="0.8" fill="none"/></svg>
+  </p>
+  <p class="cover-sub">Dénia · Jávea · Moraira · Altea · Calpe</p>
+</div>
+
+<!-- ══ RESTAURANTS ══════════════════════════════════════════════════════════ -->
+<div class="section-block">
+  <p class="section-label">Section one</p>
+  <h2 class="section-title">Where to<em>eat.</em></h2>
+  <hr class="divider-line">
+</div>
+
+<p class="intro-text">Below you'll find a mix of more formal restaurants — ideal for a long, unhurried lunch or dinner — and tapas bars in Dénia's historic centre for something more casual. We've also included suggestions for where to have a drink at sunset.</p>
+<p class="intro-note">Book at least one week in advance. All prices per person, drinks not included.</p>
+
+<!-- ── DÉNIA ── -->
+<div class="town-header"><span class="town-name">Dénia</span><span class="town-line"></span></div>
+
+<p class="subcat">Rice &amp; traditional cuisine</p>
+<div class="resto-grid">
+
+  <div class="card-compact">
+    <p class="card-compact-name">DeniArròs Les Marines</p>
+    <p class="card-compact-price">25–35 €</p>
+    <p class="card-compact-tag">Rice · Valencian cuisine · Lunch &amp; dinner · Dénia</p>
+    <a class="map-link" href="https://maps.app.goo.gl/woa7r2jxwK33jLRT9" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">Venta La Giralda</p>
+    <p class="card-compact-price">20–35 €</p>
+    <p class="card-compact-tag">Rice · Family-run · Lunch only · Closed Mon · 10 min by car</p>
+    <a class="map-link" href="https://maps.app.goo.gl/b6P7PJW6kuFguQak6" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">La Nova Cuina</p>
+    <p class="card-compact-price">20–35 €</p>
+    <p class="card-compact-tag">Rice · Fideuà · Lunch &amp; dinner · Closed Mon · 10 min by car</p>
+    <a class="map-link" href="https://maps.app.goo.gl/WAHX7xNQtuXHF4Do8" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">El Pont Sec</p>
+    <p class="card-compact-price">30–40 €</p>
+    <p class="card-compact-tag">Valencian cuisine · Lunch &amp; dinner · Own vegetable garden</p>
+    <a class="map-link" href="https://maps.app.goo.gl/yyzWMZ9q9F7q9ede6" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+</div>
+
+<p class="subcat">Seafood &amp; fish</p>
+<div class="resto-grid">
+
+  <div class="card-compact">
+    <p class="card-compact-name">Restaurante El Paquebote</p>
+    <p class="card-compact-price">25–40 €</p>
+    <p class="card-compact-tag">Rice · Seafood · Lunch only · Sea view · 15 min by car</p>
+    <a class="map-link" href="https://maps.app.goo.gl/77v1xJTi5bEKDn8q6" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">Restaurante El Pegolí</p>
+    <p class="card-compact-price">35–55 €</p>
+    <p class="card-compact-tag">Seafood · Fish · Lunch only · Closed Mon · Sea view · 10 min by car</p>
+    <a class="map-link" href="https://maps.app.goo.gl/5VJQKHTgNVakPUMs6" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact" style="grid-column:1/-1; max-width:calc(50% - 4px);">
+    <p class="card-compact-name">Restaurant Sendra</p>
+    <p class="card-compact-price">25–40 €</p>
+    <p class="card-compact-tag">Fish · Very local · Les Rotes · Lunch only · Sea view · 10 min by car</p>
+    <a class="map-link" href="https://maps.app.goo.gl/dhAvn1AAYC2ymRG26" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+</div>
+
+<p class="subcat">Tapas &amp; old town</p>
+<div class="resto-grid">
+
+  <div class="card-compact">
+    <p class="card-compact-name">Casa Federico</p>
+    <p class="card-compact-price">30–40 €</p>
+    <p class="card-compact-tag">Tapas · Grill · Lunch &amp; dinner · Closed Tue</p>
+    <a class="map-link" href="https://maps.app.goo.gl/yPy7TrhGcPXrDekc9" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">El Baret de Miquel</p>
+    <p class="card-compact-price">35–50 €</p>
+    <p class="card-compact-tag">Creative Valencian · Lunch &amp; dinner · Closed Mon &amp; Sun</p>
+    <a class="map-link" href="https://maps.app.goo.gl/iZ2Hcyk2ffmjMwra8" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">Ca Pepa Teresa</p>
+    <p class="card-compact-price">15–25 €</p>
+    <p class="card-compact-tag">Tapas · Grill · Old town · Every day</p>
+    <a class="map-link" href="https://maps.app.goo.gl/VPUKkstiEYYeKfwBA" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">Tasca Els Tomassets</p>
+    <p class="card-compact-price">15–25 €</p>
+    <p class="card-compact-tag">Tapas · Tavern · Old town · Every day from 9am</p>
+    <a class="map-link" href="https://maps.app.goo.gl/mXjZvrtAfGj9AMDz5" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact" style="grid-column:1/-1; max-width:calc(50% - 4px);">
+    <p class="card-compact-name">Bodega Casa Benjamín</p>
+    <p class="card-compact-price">15–25 €</p>
+    <p class="card-compact-tag">Tavern · Wine · Lunch &amp; dinner · Closed Tue</p>
+    <a class="map-link" href="https://maps.app.goo.gl/xTzcopkzdnN4zU689" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+</div>
+
+<p class="subcat">Drinks &amp; sundowners</p>
+<ul class="sundowner-list">
+  <li><span class="sundowner-dot"></span><span class="sundowner-name">Mala Vita</span><a class="map-link" style="margin-left:auto;" href="https://maps.app.goo.gl/j3eR2etDLDtEPKJ36" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a></li>
+  <li><span class="sundowner-dot"></span><span class="sundowner-name">Zensa Lounge</span><a class="map-link" style="margin-left:auto;" href="https://maps.app.goo.gl/7hjrhCW2zww7SzU2A" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a></li>
+  <li><span class="sundowner-dot"></span><span class="sundowner-name">Mikonos Beach Club</span><a class="map-link" style="margin-left:auto;" href="https://maps.app.goo.gl/JruyLx1oYHoqQnFJA" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a></li>
+  <li><span class="sundowner-dot"></span><span class="sundowner-name">Los Baños Sunshine Bar</span><a class="map-link" style="margin-left:auto;" href="https://maps.app.goo.gl/uciZA8YZwsv2HqZFA" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a></li>
+  <li><span class="sundowner-dot"></span><span class="sundowner-name">Soul Restaurant &amp; Rooftop</span><a class="map-link" style="margin-left:auto;" href="https://maps.app.goo.gl/tL4oypeuU2b3bT8U7" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a></li>
+</ul>
+
+<!-- ── JÁVEA ── -->
+<div class="town-header"><span class="town-name">Jávea <span style="font-size:13px;font-weight:400;color:var(--taupe);">· 25 min by car</span></span><span class="town-line"></span></div>
+
+<p class="subcat">Restaurants</p>
+<div class="resto-grid">
+
+  <div class="card-compact">
+    <p class="card-compact-name">Posidonia</p>
+    <p class="card-compact-price">30–45 €</p>
+    <p class="card-compact-tag">Rice · Seafood · Arenal beach · Lunch &amp; dinner</p>
+    <a class="map-link" href="https://maps.app.goo.gl/oJScUrRJWGg68bEV7" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact">
+    <p class="card-compact-name">La Fontana</p>
+    <p class="card-compact-price">25–40 €</p>
+    <p class="card-compact-tag">Valencian cuisine · Harbour · Lunch &amp; dinner</p>
+    <a class="map-link" href="https://maps.app.goo.gl/ba2ZDRjfZgNvN8yz9" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact" style="grid-column:1/-1; max-width:calc(50% - 4px);">
+    <p class="card-compact-name">Sotavent</p>
+    <p class="card-compact-price">20–35 €</p>
+    <p class="card-compact-tag">Tapas · Market cuisine · Closed Wed</p>
+    <a class="map-link" href="https://maps.app.goo.gl/qXh3DFKJho6gNJZ79" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+</div>
+
+<p class="subcat">Beach clubs</p>
+<div class="resto-grid">
+
+  <div class="card-compact card-compact-beach">
+    <p class="card-compact-name">Lulu Beachclub</p>
+    <p class="card-compact-tag">Beach club · Cala Blanca · From 12:30h · Not on the beach but nice views</p>
+    <a class="map-link" href="https://maps.app.goo.gl/U6FFkBHdFuEP6yDbA" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact card-compact-beach">
+    <p class="card-compact-name">La Siesta</p>
+    <p class="card-compact-tag">Beach bar · Arenal · 9h–20h · Every day</p>
+    <a class="map-link" href="https://maps.app.goo.gl/bNd1MAvPTVQZNCsd8" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+  <div class="card-compact card-compact-beach" style="grid-column:1/-1; max-width:calc(50% - 4px);">
+    <p class="card-compact-name">Maraki Beach</p>
+    <p class="card-compact-tag">Chiringuito · Between port &amp; Arenal · From 8h</p>
+    <a class="map-link" href="https://maps.app.goo.gl/eCKCSPikyJz6rTbPA" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+
+</div>
+
+<div class="pull-quote">
+  "The best food on the Costa Blanca has no Michelin stars — just good produce, honest rice, and the right table."
+  <span>Marina Alta · Valencian cuisine</span>
+</div>
+
+<!-- ══ BEACHES ════════════════════════════════════════════════════════════════ -->
+<div class="section-block">
+  <p class="section-label">Section two</p>
+  <h2 class="section-title">The best<em>beaches.</em></h2>
+  <hr class="divider-line">
+</div>
+
+<div class="beach-grid">
+  <div class="beach-card">
+    <p class="beach-name">Les Rotes</p>
+    <p class="beach-town">Dénia</p>
+    <p class="beach-desc">Wild rocky coves south of Dénia. Crystal-clear water and great snorkelling. No facilities. Arrive early.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/EVysevSK3jM5ud798" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+  <div class="beach-card">
+    <p class="beach-name">Cala Granadella</p>
+    <p class="beach-town">Jávea</p>
+    <p class="beach-desc">One of the most spectacular coves on the Costa Blanca. Intense turquoise water. Arrive before 9:30h in July.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/3G4eay7wuFLvHXb38" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+  <div class="beach-card">
+    <p class="beach-name">Playa de la Barraca</p>
+    <p class="beach-town">Jávea</p>
+    <p class="beach-desc">Quiet and uncrowded. Pebble seabed with exceptional visibility — one of Jávea's best snorkel spots.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/XewV2FEgCB8CGw4E6" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+  <div class="beach-card">
+    <p class="beach-name">Cala Blanca</p>
+    <p class="beach-town">Jávea</p>
+    <p class="beach-desc">Small, well-preserved cove near Lulu Beachclub. Walkable from town. Go early in summer.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/iRVmyRJ54pJQKYth8" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+
+<!-- ══ ON THE WATER ═══════════════════════════════════════════════════════════ -->
+<div class="section-block">
+  <p class="section-label">Section three</p>
+  <h2 class="section-title">On the<em>water.</em></h2>
+  <hr class="divider-line">
+</div>
+
+<div class="note-box">In July, book everything at least two weeks in advance.</div>
+
+<p class="subcat">Guided kayak · Route to Cova Tallada</p>
+<p style="font-size:11.5px;line-height:1.65;margin-bottom:12px;color:var(--dark);">A huge sea cave reached by kayak from Les Rotes beach — <strong>roughly 45 minutes paddling from shore.</strong> Includes guide, life jacket, snorkel gear and snacks. Total 2.5–3 hours.</p>
+
+<table class="info-table">
+  <thead><tr><th>Company</th><th>Price approx.</th><th>Contact</th><th>Website</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-name">Kayak Cova Tallada</td>
+      <td class="td-price">35–40 €/person</td>
+      <td class="td-note">+34 617 065 893</td>
+      <td class="td-note"><a class="web-link" href="https://www.turismoactivomontgo.com/en-gb" target="_blank">turismoactivomontgo.com</a></td>
+    </tr>
+    <tr>
+      <td class="td-name">Kayak Dénia</td>
+      <td class="td-price">35–45 €/person</td>
+      <td class="td-note">+34 679 753 761</td>
+      <td class="td-note"><a class="web-link" href="https://www.kayakdenia.com/en-gb/home" target="_blank">kayakdenia.com</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="subcat">Boat hire · No licence required</p>
+<p style="font-size:11.5px;line-height:1.65;margin-bottom:12px;color:var(--dark);">Small motorboats for 3–5 people. No licence needed. The most free-spirited way to explore the coves.</p>
+
+<table class="info-table">
+  <thead><tr><th>Company &amp; location</th><th>Price approx.</th><th>Contact</th><th>Website</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-name">Sea Rent Jávea · Arenal beach</td>
+      <td class="td-price">80–150 €/4 hours</td>
+      <td class="td-note">+34 672 626 439</td>
+      <td class="td-note"><a class="web-link" href="https://www.searentjavea.com/en/" target="_blank">searentjavea.com</a></td>
+    </tr>
+    <tr>
+      <td class="td-name">Alquiler Barco Dénia · Puerto El Portet</td>
+      <td class="td-price">90–160 €/4 hours</td>
+      <td class="td-note">+34 603 868 630</td>
+      <td class="td-note"><a class="web-link" href="https://alquilerbarcodenia.com/" target="_blank">alquilerbarcodenia.com</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="subcat">Skippered boat · Full day</p>
+<div class="card card-bar">
+  <div class="card-header"><span class="card-name">De Cala en Cala · Dénia</span><span class="card-price">400–600 € / boat</span></div>
+  <p class="card-tag">Groups · Full day · Dénia marina</p>
+  <a class="web-link" href="https://decalaencala.com/en/" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>decalaencala.com · Tel. +34 639 540 384</a>
+</div>
+
+<!-- ══ MARKETS ═════════════════════════════════════════════════════════════════ -->
+<div class="section-block">
+  <p class="section-label">Section four</p>
+  <h2 class="section-title">Markets &amp;<em>villages.</em></h2>
+  <hr class="divider-line">
+</div>
+
+<div class="mercado-card">
+  <p class="mercado-name">Mercat Municipal de Dénia</p>
+  <p class="mercado-when">Mon–Sat · 8h–14h</p>
+  <p class="mercado-desc">The most authentic market in the area. Fresh fish, local fruit, butchers, flowers and bars inside for breakfast among the stalls.</p>
+  <a class="map-link" href="https://share.google/cSiep58D0OIX56Q8k" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+</div>
+
+<div class="mercado-card">
+  <p class="mercado-name">Mercadillo de Pedreguer</p>
+  <p class="mercado-when">Sundays · 8h–13h · 10 min from Dénia</p>
+  <p class="mercado-desc">The best inland market in the Marina Alta. Antiques, local crafts and fresh produce. Genuine village feel, no tourist trap.</p>
+  <a class="map-link" href="https://share.google/x6vS8NBwOaT0S4NuF" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+</div>
+
+<div class="mercado-card">
+  <p class="mercado-name">Mercadillo de Jávea</p>
+  <p class="mercado-when">Thursdays · Morning · Jávea harbour</p>
+  <p class="mercado-desc">Clothes, accessories and local produce by the port. Easy to combine with a morning at the Arenal or old town.</p>
+  <a class="map-link" href="https://share.google/m2S3om0jMYxbnYr3p" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+</div>
+
+<div class="mercado-card">
+  <p class="mercado-name">Gata de Gorgos</p>
+  <p class="mercado-when">Shops open all week · 15 min from Dénia</p>
+  <p class="mercado-desc">Unique in Spain. An entire village of wicker and rattan workshops selling directly from the maker. A completely different kind of visit.</p>
+  <a class="map-link" href="https://share.google/7XB2JirhaQcj7Ggu5" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+</div>
+
+<!-- ══ THINGS TO DO ════════════════════════════════════════════════════════════ -->
+<div class="section-block">
+  <p class="section-label">Section five</p>
+  <h2 class="section-title">Things not to<em>miss.</em></h2>
+  <hr class="divider-line">
+</div>
+
+<div class="town-header"><span class="town-name">Dénia</span><span class="town-line"></span></div>
+
+<div class="visita-item">
+  <div class="visita-stripe"></div>
+  <div class="visita-body">
+    <p class="visita-name">Castillo de Dénia</p>
+    <p class="visita-tag">Cultural · 3 € · 10h–18h</p>
+    <p class="visita-desc">Dénia's landmark castle with panoramic views over the port and sea. Inside: an archaeological museum and a Civil War air-raid tunnel carved into the rock — not to be missed.</p>
+    <a class="map-link" href="https://share.google/KNhtcyi0Yy940za4F" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe"></div>
+  <div class="visita-body">
+    <p class="visita-name">Cova Tallada by kayak</p>
+    <p class="visita-tag">Activity · 35–50 €/person</p>
+    <p class="visita-desc">A spectacular sea cave paddled to from Les Rotes — about 45 minutes from shore. Snorkel included. The single best activity in the area.</p>
+    <a class="map-link" href="https://share.google/IO153SJw3vwkgutur" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe"></div>
+  <div class="visita-body">
+    <p class="visita-name">E-bike route · Montgó Natural Park</p>
+    <p class="visita-tag">Activity · 40 km · ~55–65 €/person · Guide &amp; bike included</p>
+    <p class="visita-desc">40 km guided ride through the Montgó park between Dénia and Jávea. Stunning scenery and sea views throughout.</p>
+    <a class="map-link" href="https://www.getyourguide.com/en-gb/denia-l101088/denia-electric-mountain-bike-tour-around-montgo-t895599/?visitor-id=713CF04F30494F31BDE8AFF4B4F3CB35&locale_autoredirect_optout=true" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Book on GetYourGuide</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="town-header"><span class="town-name">Jávea</span><span class="town-line"></span></div>
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--olive)"></div>
+  <div class="visita-body">
+    <p class="visita-name">Cap de Sant Antoni · Jávea Lighthouse</p>
+    <p class="visita-tag">Walking · Free · Open 24h · Best at sunset</p>
+    <p class="visita-desc">Easy walk to the lighthouse at the tip of Jávea. Some of the best coastal views in the region.</p>
+    <a class="map-link" href="https://share.google/atVhdhbyddmvoJVGP" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--olive)"></div>
+  <div class="visita-body">
+    <p class="visita-name">San Bartolomé Church &amp; Gothic old town</p>
+    <p class="visita-tag">Cultural · Free</p>
+    <p class="visita-desc">Gothic-Levantine architecture unlike anywhere else on the Costa Blanca. Authentic, quiet and never overcrowded.</p>
+    <a class="map-link" href="https://share.google/MPsftQLtxQikRH5hV" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="town-header"><span class="town-name">Altea</span><span class="town-line"></span></div>
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--taupe)"></div>
+  <div class="visita-body">
+    <p class="visita-name">Old Town · The Blue Domes</p>
+    <p class="visita-tag">Cultural · Free · The finest old town on the Costa Blanca</p>
+    <p class="visita-desc">Whitewashed houses, cobbled streets and blue domes. Known as "the dome of the Mediterranean." Visit before 11h or after 19h.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/LWWRP7bn7eBrGh5H7" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--taupe)"></div>
+  <div class="visita-body">
+    <p class="visita-name">Portal Vell · 17th-century gateway</p>
+    <p class="visita-tag">Monument · Listed cultural heritage · Free</p>
+    <p class="visita-desc">The entrance to Altea's walled enclosure, built in 1617. Starting point for the most beautiful walk in the village.</p>
+    <a class="map-link" href="https://maps.app.goo.gl/F9LtjanuPEEw7SvE7" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--taupe)"></div>
+  <div class="visita-body">
+    <p class="visita-name">Mirador de Altea</p>
+    <p class="visita-tag">Views · Free · Do not miss at sunset</p>
+    <p class="visita-desc">The best panoramic viewpoint in Altea. Extraordinary sea views at golden hour.</p>
+    <a class="map-link" href="https://share.google/9Iqo8H9JSdq7hkEL7" target="_blank"><svg width="10" height="13" viewBox="0 0 10 13" fill="none"><use href="#pin"/></svg>Google Maps</a>
+  </div>
+</div>
+<hr class="visita-sep">
+
+<div class="visita-item">
+  <div class="visita-stripe" style="background:var(--taupe)"></div>
+  <div class="visita-body">
+    <p class="visita-name">Art galleries</p>
+    <p class="visita-tag">Cultural · Free · Throughout the old town</p>
+    <p class="visita-desc">Altea has a long artistic tradition with galleries tucked into every corner of the old town. Worth wandering without a plan.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p class="footer-title">Marina Alta.</p>
+  <p class="footer-sub">Costa Blanca · Alicante · Spain</p>
+</div>
+
+</body>
+</html>
